@@ -116,6 +116,22 @@ a:hover {
 .center-field {
   margin: 0 auto;
 }
+@-webkit-keyframes shineRed {
+  from {
+    -webkit-box-shadow: 0 0 5px #bbb;
+  }
+  50% {
+    -webkit-box-shadow: 0 0 50px #26bcd5;
+  }
+  to {
+    -webkit-box-shadow: 0 0 5px #bbb;
+  }
+}
+.center-field img:hover {
+  -webkit-animation-name: shineRed;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+}
 .avatar {
   cursor: pointer;
   margin-top: -70px;
@@ -280,7 +296,7 @@ ul.category-list li a:hover {
   border-left: 2px #bbb solid;
 }
 .post-title-item:hover {
-  border-left: 4px #1e8bc3 solid;
+  background-color: #f0f8ff;
 }
 .post-title-item p {
   margin-top: 2px;
