@@ -79,4 +79,4 @@ theme: landscape
 deploy:
   type:git
   repo:https://github.com/wangchuangshi/study.git
-  branch:hexo
+  branch:master
