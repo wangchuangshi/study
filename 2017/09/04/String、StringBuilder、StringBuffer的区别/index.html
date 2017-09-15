@@ -1,0 +1,388 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="WangCS">
+  
+  
+  
+  
+    <meta name="description" content="&ensp;&ensp;三者的区别，简单来讲：
+
+String： 字符串常量StringBuffer： 字符串变量（线程安全）StringBuilder： 字符串变量（非线程安全
+
+1.String类型&ensp;&ensp;从概念上讲，Java字符串就是Unicode字符串序列。Java没有内置的字符串类型，而是在标准Java类库中提供了一个预定义类，很自然地叫做String。&ensp;...">
+  
+  <title>String、StringBuilder、StringBuffer的区别 [ BlueBird ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2017/09/04/寂寞是最好的增值期/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        寂寞是最好的增值期
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2017/09/01/JavaScript-数组排序/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        JavaScript数组排序
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg"/>
+          <div id="homelink">BlueBird</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">博文</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/wangchuangshi">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>String、StringBuilder、StringBuffer的区别</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2017-09-04</span>
+      
+        <span id = "post-title-updated">修改于 2017-09-04</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/Java/">Java</a>
+      
+      </span>
+      
+    </p>
+    
+    <hr>
+<p>&ensp;&ensp;三者的区别，简单来讲：</p>
+<blockquote>
+<p>String： 字符串常量<br>StringBuffer： 字符串变量（线程安全）<br>StringBuilder： 字符串变量（非线程安全</p>
+</blockquote>
+<h3 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1.String类型"></a>1.String类型</h3><p>&ensp;&ensp;从概念上讲，Java字符串就是<strong>Unicode字符串序列</strong>。Java没有内置的字符串类型，而是在标准Java类库中提供了一个预定义类，很自然地叫做<strong>String</strong>。<br>&ensp;&ensp;String 类型和 StringBuffer 类型的主要性能区别其实在于 String 是<strong>不可变的对象</strong>, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用 String ，因为每次生成对象都会对系统性能产生影响。<br>&ensp;&ensp;而如果是使用 StringBuffer 类则结果就不一样了，每次结果都会对 StringBuffer 对象本身进行操作，而不是生成新的对象，再改变对象引用。所以在一般情况下我们<strong>推荐使用</strong>。<br>&ensp;&ensp;一定不要用==运算符检测两个字符串是否相等！这个运算符只能够确定两个字符串是否放置在同一个位置上。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">String greeting=<span class="string">"Hello"</span>;</div><div class="line"><span class="keyword">if</span>(greeting==<span class="string">"Hello"</span>)&#123;</div><div class="line">	<span class="comment">/*有可能为true**/</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>(greeting.substring(<span class="number">0</span>,<span class="number">3</span>)==<span class="string">"Hel"</span>)&#123;</div><div class="line">	<span class="comment">/*有可能为false**/</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*所以对于空字符串的检测尽量使用equals()方法来比较**/</span></div><div class="line"><span class="comment">/*有时要检查一个字符串既不是null也不为空串，这时要使用以下条件:**/</span></div><div class="line"><span class="keyword">if</span>(str != <span class="keyword">null</span> &amp;&amp; !str.equals(<span class="string">""</span>))</div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;<font color="red">在大部分情况下 StringBuffer &gt; String</font></p>
+<h3 id="2-StringBuffer"><a href="#2-StringBuffer" class="headerlink" title="2.StringBuffer"></a>2.StringBuffer</h3><p>&ensp;&ensp;Java.lang.StringBuffer线程安全的可变字符序列。一个类似于 String 的字符串缓冲区，但不能修改。虽然在任意时间点上它都包含某种特定的字符序列，但通过某些方法调用可以改变该序列的长度和内容。可将字符串缓冲区安全地用于多个线程。可以在必要时对这些方法进行同步，因此任意特定实例上的所有操作就好像是以串行顺序发生的，该顺序与所涉及的每个线程进行的方法调用顺序一致。<br>&ensp;&ensp;StringBuffer 上的主要操作是 <strong>append</strong> 和 <strong>insert</strong> 方法，可重载这些方法，以接受任意类型的数据。每个方法都能有效地将给定的数据转换成字符串，然后将该字符串的字符追加或插入到字符串缓冲区中。<strong>append 方法始终将这些字符添加到缓冲区的末端；而 insert 方法则在指定的点添加字符</strong>。<br>&ensp;&ensp;例如，如果 z 引用一个当前内容是“start”的字符串缓冲区对象，则此方法调用 z.append(“le”) 会使字符串缓冲区包含“startle”，而 z.insert(4, “le”) 将更改字符串缓冲区，使之包含“starlet”。<br>&ensp;&ensp;<font color="red">在大部分情况下 StringBuilder &gt; StringBuffer</font></p>
+<h3 id="3-StringBuilder"><a href="#3-StringBuilder" class="headerlink" title="3.StringBuilder"></a>3.StringBuilder</h3><p>&ensp;&ensp;java.lang.StringBuilder一个可变的字符序列是5.0新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）。如果可能，建议优先采用该类，因为在大多数实现中，它比 StringBuffer 要快。<strong>两者的方法基本相同</strong>。<br>在此附上String API 以及StringBuilder API(StringBuffer API 与其基本相同)</p>
+<blockquote>
+<p>String API</p>
+<ul>
+<li>1.char charAt (int index)<br>返回给定位置的代码单元。除非对底层的代码单元感兴趣，否则不需要调用这个方法。</li>
+<li>2.int codePointAt(int index) 5.0<br>返回从给定位置开始的码点。</li>
+<li>3.int compareTo(String other)<br>按照字典顺序，如果字符串位于other之前，返回一个负数；如果字符串位于other之后，返回一个正数；如果两个字符串相等，返回0。</li>
+<li><strong>4.boolean equals(Object other)</strong><br><strong>如果字符串与other相等，返回true。</strong></li>
+<li>5.boolean equalsIgnoreCase(String other)<br>如果字符串与other相等（忽略大小写），返回true。</li>
+<li>6.boolean startsWith(String prefix)</li>
+<li>7.boolean endsWith(String suffix);<br>如果字符串以suffix开头或结尾，则返回true。</li>
+<li><strong>8.int indexOf(String str)</strong></li>
+<li>9.int indexOf(String str,int fromIndex)</li>
+<li>10.int indexOf(int cp)</li>
+<li>11.int indexOf(int cp,int fromIndex)<br>返回与字符串str或代码点cp匹配的第一个子串的开始位置。这个位置从索引0或fromIndex开始计算。如果在原始串中不存在str，返回-1。</li>
+<li><strong>12.int length()<br>返回字符串的长度</strong></li>
+<li>13.String replace(CharSequence oldString,CharSequence new String)<br>返回一个新字符串。这个字符串用newString代替原始字符串中所有的oldString。可以用String或StringBuffer对象作为CharSeqence参数。</li>
+<li>14.String substring(int beginIndex)</li>
+<li>15.String substring(int beginIndex,int endIndex)<br>返回一个新字符串。这个字符串用包含原始字符串中从beginIdex到串尾或endIndex-1的所有代码单元。</li>
+<li>16.String toLowerCase()</li>
+<li>17.String toUpperCase()</li>
+<li>18.trim()<br>返回一个新字符串。这个字符串将删除了原始字符串头部和尾部的空格。</li>
+<li>19.String join(CharSequence delimiter,CharSequence…elements) 8<br>返回一个新字符串，用给定的定界符连接所有元素。</li>
+</ul>
+</blockquote>
+<p>以下是StringBuilder API</p>
+<blockquote>
+<p>StringBuilder API</p>
+<ul>
+<li><strong>1.StringBuilder()<br>构造一个空的字符串构建器。</strong></li>
+<li>2.int length()<br>返回构建器或缓冲器中的代码单元数量。</li>
+<li><strong>3.StringBuilder append(String str)<br>追加一个字符串并返回this。</strong></li>
+<li>4.StringBuilder append(char c)<br>追加一个代码单元并返回this。</li>
+<li>5.StringBuilder appendCodePoint(int cp)<br>追加一个代码点，并将其转换为一个或两个代码单元并返回this</li>
+<li>6.void setCharAt(int i,char c)<br>将第i个代码单元设置为c。</li>
+<li>7.StringBuilder inset(int offset,String str)<br>在offset位置插入一个字符串并返回this。</li>
+<li>8.StringBuilder delete(int startIndex,int endIndex)<br>删除偏移量从startIndex到-endIndex-1的代码单元并返回this。</li>
+<li><strong>9.String toString()<br>返回一个与构建器或缓冲器内容相同的字符串。</strong></li>
+</ul>
+</blockquote>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-String类型"><span class="toc-text">1.String类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-StringBuffer"><span class="toc-text">2.StringBuffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-StringBuilder"><span class="toc-text">3.StringBuilder</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2017/09/04/寂寞是最好的增值期/" class="prev">&larr; 上一篇 寂寞是最好的增值期</a>
+  
+
+  
+
+  
+    <a href="/2017/09/01/JavaScript-数组排序/" class="next">下一篇 JavaScript数组排序 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+  <script type="text/javascript">
+    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
+  </script>
+  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by WangCS using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- UY BEGIN -->
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143077"></script>
+<!-- UY END -->
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg">
+    <p id="description">每天进步一点点，一点点就好！</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/wangchuangshi">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6c9f46c6384b834f00e6ec1cd690d9a6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="/js/tctip-master/tctip-1.0.2.js"></script>
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "55AAAD";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

@@ -1,0 +1,363 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="WangCS">
+  
+  
+  
+  
+    <meta name="description" content="&ensp;&ensp;JavaScript获取当前日期时间及格式化操作1234567891011121314var myDate = new Date();myDate.getYear();        /*获取当前年份 已废弃 由getFullYear()方法取代**/myDate.getFullYear();    /*获取完整的年份(4位,1970-????)**/myDate.g...">
+  
+  <title>JavaScript 日期操作 [ BlueBird ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2017/09/15/hello-world/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Hello World
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2017/09/05/Java中循环删除list中元素的方法/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Java中循环删除list中元素的方法
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg"/>
+          <div id="homelink">BlueBird</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">博文</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/wangchuangshi">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>JavaScript 日期操作</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2017-09-06</span>
+      
+        <span id = "post-title-updated">修改于 2017-09-06</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/JavaScript/">JavaScript</a>
+      
+      </span>
+      
+    </p>
+    
+    <hr>
+<h3 id="ensp-ensp-JavaScript获取当前日期时间及格式化操作"><a href="#ensp-ensp-JavaScript获取当前日期时间及格式化操作" class="headerlink" title="&ensp;&ensp;JavaScript获取当前日期时间及格式化操作"></a>&ensp;&ensp;JavaScript获取当前日期时间及格式化操作</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">myDate.getYear();        <span class="comment">/*获取当前年份 已废弃 由getFullYear()方法取代**/</span></div><div class="line">myDate.getFullYear();    <span class="comment">/*获取完整的年份(4位,1970-????)**/</span></div><div class="line">myDate.getMonth();       <span class="comment">/*获取当前月份(0-11,0代表1月)**/</span></div><div class="line">myDate.getDate();        <span class="comment">/*获取当前日(1-31)**/</span></div><div class="line">myDate.getDay();         <span class="comment">/*获取当前星期X(0-6,0代表星期天)**/</span></div><div class="line">myDate.getTime();        <span class="comment">/*获取当前时间(从1970.1.1开始的毫秒数)**/</span></div><div class="line">myDate.getHours();       <span class="comment">/*获取当前小时数(0-23)**/</span></div><div class="line">myDate.getMinutes();     <span class="comment">/*获取当前分钟数(0-59)**/</span></div><div class="line">myDate.getSeconds();     <span class="comment">/*获取当前秒数(0-59)**/</span></div><div class="line">myDate.getMilliseconds();    <span class="comment">/*获取当前毫秒数(0-999)**/</span></div><div class="line">myDate.toLocaleDateString();     <span class="comment">/*获取当前日期**/</span></div><div class="line">myDate.toLocaleTimeString();     <span class="comment">/*获取当前时间**/</span></div><div class="line">myDate.toLocaleString( );        <span class="comment">/*获取日期与时间**/</span></div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;在此特别强调，getMonth()方法返回的月份为：当前月-1。即12月返回11。所以想要获取”yyyy-MM-dd”格式的字符串，其中”MM”为(date.getMonth()+1);<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*获取当前时间"yyyy-MM-dd"格式的字符串**/</span></div><div class="line"><span class="keyword">var</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line"><span class="built_in">console</span>.info(date.getFullYear()+<span class="string">"-"</span>+(date.getMonth()+<span class="number">1</span>)+<span class="string">"-"</span>+date.getDate());</div><div class="line"><span class="comment">/*获取某个时间"yyyy-MM-dd"格式的字符串**/</span></div><div class="line"><span class="keyword">var</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"2017-08-13"</span>);</div><div class="line"><span class="built_in">console</span>.info(date1.getFullYear() +<span class="string">"-"</span>+(date1.getMonth()+<span class="number">1</span>)+<span class="string">"-"</span>+date1.getDate());</div></pre></td></tr></table></figure></p>
+<h3 id="ensp-ensp-常用日期操作方法"><a href="#ensp-ensp-常用日期操作方法" class="headerlink" title="&ensp;&ensp;常用日期操作方法"></a>&ensp;&ensp;常用日期操作方法</h3><blockquote>
+<p>1.判断是否是闰年</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*判断是否是闰年**/</span></div><div class="line"><span class="built_in">Date</span>.prototype.isLeapYear = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  </div><div class="line">    <span class="keyword">return</span> (<span class="number">0</span>==<span class="keyword">this</span>.getYear()%<span class="number">4</span> &amp;&amp; ((<span class="keyword">this</span>.getYear()%<span class="number">100</span>!=<span class="number">0</span>) || (<span class="keyword">this</span>.getYear()%<span class="number">400</span>==<span class="number">0</span>)));  </div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();<span class="comment">/*2017**/</span></div><div class="line"><span class="built_in">console</span>.info(date.isLeapYear());<span class="comment">/*false**/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.日期格式化</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*日期格式化**/</span></div><div class="line"><span class="built_in">Date</span>.prototype.Format = <span class="function"><span class="keyword">function</span>(<span class="params">formatStr</span>)</span>&#123;  </div><div class="line">    <span class="keyword">var</span> str = formatStr;  </div><div class="line">    <span class="keyword">var</span> Week = [<span class="string">'日'</span>,<span class="string">'一'</span>,<span class="string">'二'</span>,<span class="string">'三'</span>,<span class="string">'四'</span>,<span class="string">'五'</span>,<span class="string">'六'</span>];  </div><div class="line">    str=str.replace(<span class="regexp">/yyyy|YYYY/</span>,<span class="keyword">this</span>.getFullYear());  </div><div class="line">    str=str.replace(<span class="regexp">/yy|YY/</span>,(<span class="keyword">this</span>.getYear() % <span class="number">100</span>)&gt;<span class="number">9</span>?(<span class="keyword">this</span>.getYear() % <span class="number">100</span>).toString():<span class="string">'0'</span> + (<span class="keyword">this</span>.getYear() % <span class="number">100</span>));  </div><div class="line">    str=str.replace(<span class="regexp">/MM/</span>,<span class="keyword">this</span>.getMonth()&gt;<span class="number">9</span>?<span class="keyword">this</span>.getMonth().toString():<span class="string">'0'</span> + <span class="keyword">this</span>.getMonth());  </div><div class="line">    str=str.replace(<span class="regexp">/M/g</span>,<span class="keyword">this</span>.getMonth());  </div><div class="line">    str=str.replace(<span class="regexp">/w|W/g</span>,Week[<span class="keyword">this</span>.getDay()]);  </div><div class="line">    str=str.replace(<span class="regexp">/dd|DD/</span>,<span class="keyword">this</span>.getDate()&gt;<span class="number">9</span>?<span class="keyword">this</span>.getDate().toString():<span class="string">'0'</span> + <span class="keyword">this</span>.getDate());  </div><div class="line">    str=str.replace(<span class="regexp">/d|D/g</span>,<span class="keyword">this</span>.getDate());  </div><div class="line">    str=str.replace(<span class="regexp">/hh|HH/</span>,<span class="keyword">this</span>.getHours()&gt;<span class="number">9</span>?<span class="keyword">this</span>.getHours().toString():<span class="string">'0'</span> + <span class="keyword">this</span>.getHours());  </div><div class="line">    str=str.replace(<span class="regexp">/h|H/g</span>,<span class="keyword">this</span>.getHours());  </div><div class="line">    str=str.replace(<span class="regexp">/mm/</span>,<span class="keyword">this</span>.getMinutes()&gt;<span class="number">9</span>?<span class="keyword">this</span>.getMinutes().toString():<span class="string">'0'</span> + <span class="keyword">this</span>.getMinutes());  </div><div class="line">    str=str.replace(<span class="regexp">/m/g</span>,<span class="keyword">this</span>.getMinutes());  </div><div class="line">    str=str.replace(<span class="regexp">/ss|SS/</span>,<span class="keyword">this</span>.getSeconds()&gt;<span class="number">9</span>?<span class="keyword">this</span>.getSeconds().toString():<span class="string">'0'</span> + <span class="keyword">this</span>.getSeconds());  </div><div class="line">    str=str.replace(<span class="regexp">/s|S/g</span>,<span class="keyword">this</span>.getSeconds());  </div><div class="line">    <span class="keyword">return</span> str;  </div><div class="line">&#125;</div><div class="line"><span class="comment">/*不用管上面一大串，根据自己需要的格式传入就可以**/</span></div><div class="line"><span class="keyword">var</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line"><span class="built_in">console</span>.info(date.Format(<span class="string">"yyyy-MM-dd HH:mm:ss w"</span>));<span class="comment">/*2017-08-06 22:16:48 三**/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>3.求两个时间的天数差 日期格式为 YYYY-MM-dd</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*求两个时间的天数差 日期格式为 YYYY-MM-dd**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">daysBetween</span>(<span class="params">DateOne,DateTwo</span>)</span>&#123;  </div><div class="line">    <span class="keyword">var</span> OneMonth = DateOne.substring(<span class="number">5</span>,DateOne.lastIndexOf (<span class="string">'-'</span>));  </div><div class="line">    <span class="keyword">var</span> OneDay = DateOne.substring(DateOne.length,DateOne.lastIndexOf (<span class="string">'-'</span>)+<span class="number">1</span>);  </div><div class="line">    <span class="keyword">var</span> OneYear = DateOne.substring(<span class="number">0</span>,DateOne.indexOf (<span class="string">'-'</span>));  </div><div class="line"> </div><div class="line">    <span class="keyword">var</span> TwoMonth = DateTwo.substring(<span class="number">5</span>,DateTwo.lastIndexOf (<span class="string">'-'</span>));  </div><div class="line">    <span class="keyword">var</span> TwoDay = DateTwo.substring(DateTwo.length,DateTwo.lastIndexOf (<span class="string">'-'</span>)+<span class="number">1</span>);  </div><div class="line">    <span class="keyword">var</span> TwoYear = DateTwo.substring(<span class="number">0</span>,DateTwo.indexOf (<span class="string">'-'</span>));  </div><div class="line"> </div><div class="line">    <span class="keyword">var</span> cha=((<span class="built_in">Date</span>.parse(OneMonth+<span class="string">'/'</span>+OneDay+<span class="string">'/'</span>+OneYear)- <span class="built_in">Date</span>.parse(TwoMonth+<span class="string">'/'</span>+TwoDay+<span class="string">'/'</span>+TwoYear))/<span class="number">86400000</span>);  </div><div class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.abs(cha);  </div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.info(daysBetween(<span class="string">"2017-09-06"</span>,<span class="string">"2016-09-06"</span>))<span class="comment">/*365**/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>4.日期计算</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*计算当前时间加上相应时间之后的日期**/</span></div><div class="line"><span class="built_in">Date</span>.prototype.DateAdd = <span class="function"><span class="keyword">function</span>(<span class="params">strInterval, Number</span>) </span>&#123;  </div><div class="line">    <span class="keyword">var</span> dtTmp = <span class="keyword">this</span>;  </div><div class="line">    <span class="keyword">switch</span> (strInterval) &#123;  </div><div class="line">        <span class="keyword">case</span> <span class="string">'s'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(dtTmp) + (<span class="number">1000</span> * <span class="built_in">Number</span>));  </div><div class="line">        <span class="keyword">case</span> <span class="string">'n'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(dtTmp) + (<span class="number">60000</span> * <span class="built_in">Number</span>));  </div><div class="line">        <span class="keyword">case</span> <span class="string">'h'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(dtTmp) + (<span class="number">3600000</span> * <span class="built_in">Number</span>));  </div><div class="line">        <span class="keyword">case</span> <span class="string">'d'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(dtTmp) + (<span class="number">86400000</span> * <span class="built_in">Number</span>));  </div><div class="line">        <span class="keyword">case</span> <span class="string">'w'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(dtTmp) + ((<span class="number">86400000</span> * <span class="number">7</span>) * <span class="built_in">Number</span>));  </div><div class="line">        <span class="keyword">case</span> <span class="string">'q'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(dtTmp.getFullYear(), (dtTmp.getMonth()) + <span class="built_in">Number</span>*<span class="number">3</span>, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());  </div><div class="line">        <span class="keyword">case</span> <span class="string">'m'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(dtTmp.getFullYear(), (dtTmp.getMonth()) + <span class="built_in">Number</span>, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());  </div><div class="line">        <span class="keyword">case</span> <span class="string">'y'</span> :<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>((dtTmp.getFullYear() + <span class="built_in">Number</span>), dtTmp.getMonth(), dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());  </div><div class="line">    &#125;  </div><div class="line">&#125;</div><div class="line"><span class="comment">/*计算两年之后**/</span> </div><div class="line"><span class="keyword">var</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line"><span class="built_in">console</span>.info(date.DateAdd(<span class="string">"y"</span>,<span class="number">2</span>));<span class="comment">/*Fri Sep 06 2019 22:31:37 GMT+0800 (中国标准时间)**/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>5.日期输出字符串，重载了系统的toString方法 </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*日期输出字符串，重载了系统的toString方法**/</span></div><div class="line"><span class="built_in">Date</span>.prototype.toString = <span class="function"><span class="keyword">function</span>(<span class="params">showWeek</span>)</span>&#123;  </div><div class="line">    <span class="keyword">var</span> myDate= <span class="keyword">this</span>;  </div><div class="line">    <span class="keyword">var</span> str = myDate.toLocaleDateString();  </div><div class="line">    <span class="keyword">if</span> (showWeek)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">var</span> Week = [<span class="string">'日'</span>,<span class="string">'一'</span>,<span class="string">'二'</span>,<span class="string">'三'</span>,<span class="string">'四'</span>,<span class="string">'五'</span>,<span class="string">'六'</span>];  </div><div class="line">        str += <span class="string">' 星期'</span> + Week[myDate.getDay()];  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> str;  </div><div class="line">&#125;     </div><div class="line"></div><div class="line"><span class="keyword">var</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line"><span class="built_in">console</span>.info(date.toString(<span class="literal">true</span>));<span class="comment">/*2017/9/6 星期三**/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>6.JavaScript电子时钟</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">&lt;a id=<span class="string">"time"</span>&gt;&lt;/a&gt;&lt;a id="bjtime"&gt;&lt;/a&gt;</div><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line"></div><div class="line"><span class="comment">/*进入页面加载的方法**/</span></div><div class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>(),time=date.getTime();</div><div class="line">	setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;set(time);</div><div class="line">	time = <span class="built_in">Number</span>(time);time += <span class="number">1000</span>;&#125;,<span class="number">1000</span>);</div><div class="line">	setTodayDate(date);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*设置日期的方法，针对年月日星期的显示**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setTodayDate</span>(<span class="params">today</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> years,months,dates,weeks, intYears,intMonths,intDates,intWeeks,today,timeString;</div><div class="line">  intYears = today.getFullYear();<span class="comment">/*获得年**/</span></div><div class="line">  intMonths = today.getMonth() + <span class="number">1</span>;<span class="comment">/*获得月份+1**/</span></div><div class="line">  intDates = today.getDate();<span class="comment">/*获得天数**/</span></div><div class="line">  intWeeks = today.getDay();<span class="comment">/*获得星期**/</span></div><div class="line">  years = intYears + <span class="string">'年     '</span>;</div><div class="line">  <span class="keyword">if</span>(intMonths &lt; <span class="number">10</span>)&#123;</div><div class="line">	  months = <span class="string">'0'</span> + intMonths + <span class="string">'月'</span>;</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">	  months = intMonths + <span class="string">'月'</span>;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(intDates &lt; <span class="number">10</span>)&#123;</div><div class="line">	  dates = <span class="string">'0'</span> + intDates + <span class="string">'日     '</span>;</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">	  dates = intDates + <span class="string">'日     '</span>;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> weekArray = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">7</span>);</div><div class="line">  weekArray[<span class="number">0</span>] = <span class="string">'星期日'</span>;</div><div class="line">  weekArray[<span class="number">1</span>] = <span class="string">'星期一'</span>;</div><div class="line">  weekArray[<span class="number">2</span>] = <span class="string">'星期二'</span>;</div><div class="line">  weekArray[<span class="number">3</span>] = <span class="string">'星期三'</span>;</div><div class="line">  weekArray[<span class="number">4</span>] = <span class="string">'星期四'</span>;</div><div class="line">  weekArray[<span class="number">5</span>] = <span class="string">'星期五'</span>;</div><div class="line">  weekArray[<span class="number">6</span>] = <span class="string">'星期六'</span>;</div><div class="line">  weeks =weekArray[intWeeks] + <span class="string">' '</span>;</div><div class="line"></div><div class="line">  timeString = years + months + dates + weeks;</div><div class="line">  </div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'time'</span>).innerHTML=timeString;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*设置北京时间的方法，针对时分秒的显示**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">time</span>)</span>&#123;</div><div class="line"> <span class="keyword">var</span> beijingTimeZone = <span class="number">8</span>;</div><div class="line"> <span class="keyword">var</span> timeOffset = ((<span class="number">-1</span> * (<span class="keyword">new</span> <span class="built_in">Date</span>()).getTimezoneOffset()) - (beijingTimeZone * <span class="number">60</span>)) * <span class="number">60000</span>;</div><div class="line"> <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>(time - timeOffset);</div><div class="line"> <span class="built_in">document</span>.getElementById(<span class="string">'bjtime'</span>).innerHTML = p(now.getHours())+<span class="string">':'</span>+p(now.getMinutes())+<span class="string">':'</span>+p(now.getSeconds());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*格式化时间的显示方式**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span>(<span class="params">s</span>)</span>&#123;</div><div class="line"><span class="keyword">return</span> s &lt; <span class="number">10</span> ? <span class="string">'0'</span> + s : s;</div><div class="line">&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ensp-ensp-JavaScript获取当前日期时间及格式化操作"><span class="toc-text">  JavaScript获取当前日期时间及格式化操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ensp-ensp-常用日期操作方法"><span class="toc-text">  常用日期操作方法</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2017/09/15/hello-world/" class="prev">&larr; 上一篇 Hello World</a>
+  
+
+  
+
+  
+    <a href="/2017/09/05/Java中循环删除list中元素的方法/" class="next">下一篇 Java中循环删除list中元素的方法 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+  <script type="text/javascript">
+    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
+  </script>
+  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by WangCS using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- UY BEGIN -->
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143077"></script>
+<!-- UY END -->
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg">
+    <p id="description">每天进步一点点，一点点就好！</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/wangchuangshi">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6c9f46c6384b834f00e6ec1cd690d9a6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="/js/tctip-master/tctip-1.0.2.js"></script>
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "55AAAD";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

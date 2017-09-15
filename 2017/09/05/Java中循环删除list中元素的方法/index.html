@@ -1,0 +1,346 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="WangCS">
+  
+  
+  
+  
+    <meta name="description" content="&ensp;&ensp;JAVA中循环遍历list有三种方式for循环、增强for循环（也就是常说的foreach循环）、iterator遍历。
+1.for循环遍历list12345for(int i=0;i&lt;list.size();i++)&#123;  if(list.get(i).equals("del"))&#123;	list.remove(i);  &#125;&#125;...">
+  
+  <title>Java中循环删除list中元素的方法 [ BlueBird ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2017/09/06/JavaScript-日期操作/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        JavaScript 日期操作
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2017/09/04/寂寞是最好的增值期/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        寂寞是最好的增值期
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg"/>
+          <div id="homelink">BlueBird</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">博文</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/wangchuangshi">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Java中循环删除list中元素的方法</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2017-09-05</span>
+      
+        <span id = "post-title-updated">修改于 2017-09-05</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/Java/">Java</a>
+      
+      </span>
+      
+    </p>
+    
+    <hr>
+<p>&ensp;&ensp;JAVA中循环遍历list有三种方式for循环、增强for循环（也就是常说的foreach循环）、iterator遍历。</p>
+<h3 id="1-for循环遍历list"><a href="#1-for循环遍历list" class="headerlink" title="1.for循环遍历list"></a>1.for循环遍历list</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</div><div class="line">  <span class="keyword">if</span>(list.get(i).equals(<span class="string">"del"</span>))&#123;</div><div class="line">	list.remove(i);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;这种方式的问题在于，删除某个元素后，list的大小发生了变化，而你的索引也在变化，所以会导致你在遍历的时候漏掉某些元素。比如当你删除第1个元素后，继续根据索引访问第2个元素时，因为删除的关系后面的元素都往前移动了一位，所以实际访问的是第3个元素。<strong>因此，这种方式可以用在删除特定的一个元素时使用，但不适合循环删除多个元素时使用</strong>。</p>
+<h3 id="2-增强for循环"><a href="#2-增强for循环" class="headerlink" title="2.增强for循环"></a>2.增强for循环</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(String x:list)&#123;</div><div class="line">  <span class="keyword">if</span>(x.equals(<span class="string">"del"</span>))&#123;</div><div class="line">    list.remove(x);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;这种方式的问题在于，删除元素后继续循环会报错误信息ConcurrentModificationException，<strong>因为元素在使用的时候发生了并发的修改，导致异常抛出</strong>。但是删除完毕马上使用break跳出，则不会触发报错。</p>
+<h3 id="3-iterator遍历。"><a href="#3-iterator遍历。" class="headerlink" title="3.iterator遍历。"></a>3.iterator遍历。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; it=list.iterator();</div><div class="line">   <span class="keyword">while</span>(it.hasNext())&#123;</div><div class="line">   String x=it.next();</div><div class="line">	<span class="keyword">if</span>(x.equals(<span class="string">"del"</span>))&#123;</div><div class="line">	it.remove();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;这种方式可以正常的循环及删除。但要注意的是，使用iterator的remove方法，如果用list的remove方法同样会报上面提到的ConcurrentModificationException错误。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>　　（1）循环删除list中特定一个元素的，可以使用三种方式中的任意一种，但在使用中要注意上面分析的各个问题。<br>　　（2）循环删除list中多个元素的，应该使用迭代器iterator方式。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-for循环遍历list"><span class="toc-text">1.for循环遍历list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-增强for循环"><span class="toc-text">2.增强for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-iterator遍历。"><span class="toc-text">3.iterator遍历。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2017/09/06/JavaScript-日期操作/" class="prev">&larr; 上一篇 JavaScript 日期操作</a>
+  
+
+  
+
+  
+    <a href="/2017/09/04/寂寞是最好的增值期/" class="next">下一篇 寂寞是最好的增值期 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+  <script type="text/javascript">
+    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
+  </script>
+  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by WangCS using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- UY BEGIN -->
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143077"></script>
+<!-- UY END -->
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg">
+    <p id="description">每天进步一点点，一点点就好！</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/wangchuangshi">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6c9f46c6384b834f00e6ec1cd690d9a6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="/js/tctip-master/tctip-1.0.2.js"></script>
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "55AAAD";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
