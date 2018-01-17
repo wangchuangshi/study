@@ -1,8 +1,8 @@
 body {
   background-color: #55aaad;
   margin: 0px;
-  font-family: Lato, "宋体", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  font-size: 18px;
+  font-family: Lato, "微软雅黑", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
 }
 @media (max-width: 860px) {
   body {
