@@ -127,6 +127,8 @@
     <hr>
 <h4 id="1-利用HashMap实现数组去重"><a href="#1-利用HashMap实现数组去重" class="headerlink" title="1.利用HashMap实现数组去重"></a>1.利用HashMap实现数组去重</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">String arra[]= &#123;<span class="string">"1"</span>,<span class="string">"12"</span>,<span class="string">"1"</span>,<span class="string">"13"</span>,<span class="string">"15"</span>,<span class="string">"23"</span>,<span class="string">"15"</span>&#125;;  </div><div class="line">Map&lt;String,Object&gt; map =<span class="keyword">new</span> HashMap&lt;String,Object&gt;();    </div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arra.length;i++)&#123;    </div><div class="line">	map.put(arra[i], arra[i]);    </div><div class="line">&#125;    </div><div class="line">List&lt;Object&gt; list = <span class="keyword">new</span> ArrayList&lt;Object&gt;();    </div><div class="line"><span class="keyword">for</span>(String in:map.keySet())&#123;    </div><div class="line">	Object str= map.get(in);    </div><div class="line">	list.add(str);  </div><div class="line">	System.out.println(in + <span class="string">"    "</span>+str);    </div><div class="line">&#125;  </div><div class="line">System.out.println(list.toString());<span class="comment">/*结果:[1, 12, 23, 13, 15]**/</span></div><div class="line">Object[] object = list.toArray();    </div><div class="line">System.out.println(object.length);</div></pre></td></tr></table></figure>
 <h4 id="2-利用ArrayList的contains实现数组去重"><a href="#2-利用ArrayList的contains实现数组去重" class="headerlink" title="2.利用ArrayList的contains实现数组去重"></a>2.利用ArrayList的contains实现数组去重</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">String arra[]= &#123;<span class="string">"1"</span>,<span class="string">"12"</span>,<span class="string">"1"</span>,<span class="string">"13"</span>,<span class="string">"15"</span>,<span class="string">"23"</span>,<span class="string">"15"</span>&#125;;  </div><div class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();  </div><div class="line"><span class="keyword">for</span>(String item:arra)&#123;  </div><div class="line">    <span class="keyword">if</span>(!list.contains(item))&#123;  </div><div class="line">        <span class="comment">/*存入不重复的项**/</span></div><div class="line">        list.add(item);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div><div class="line">System.out.println(list.toString());<span class="comment">//结果:[1, 12, 13, 15, 23]</span></div></pre></td></tr></table></figure>
+<p>hello <a href="https://wangchuangshi.github.io/2017/09/01/Java-数组去重/">https://wangchuangshi.github.io/2017/09/01/Java-数组去重/</a> bye</p>
+
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
@@ -148,14 +150,35 @@
   
 </nav>
 
-  <!-- JiaThis Button BEGIN -->
-
-  <script type="text/javascript">
-    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
-  </script>
-  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
-
-<!-- JiaThis Button END -->
+  
+    <!--MOB SHARE BEGIN-->
+                                <div class="-mob-share-ui-button -mob-share-open">分享</div>
+                                <div class="-mob-share-ui" style="display: none">
+                                    <ul class="-mob-share-list">
+                                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                                        <li class="-mob-share-qq"><p>QQ好友</p></li>
+                                        <li class="-mob-share-weixin"><p>微信</p></li>
+                                        <li class="-mob-share-douban"><p>豆瓣</p></li>
+                                        <li class="-mob-share-renren"><p>人人网</p></li>
+                                        <li class="-mob-share-kaixin"><p>开心网</p></li>
+                                        <li class="-mob-share-facebook"><p>Facebook</p></li>
+                                        <li class="-mob-share-twitter"><p>Twitter</p></li>
+                                        <li class="-mob-share-pocket"><p>Pocket</p></li>
+                                        <li class="-mob-share-google"><p>Google+</p></li>
+                                        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+                                        <li class="-mob-share-mingdao"><p>明道</p></li>
+                                        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+                                        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+                                        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+                                        <li class="-mob-share-linkedin"><p>LinkedIn</p></li>
+                                    </ul>
+                                    <div class="-mob-share-close">取消</div>
+                                </div>
+                                <div class="-mob-share-ui-bg"></div>
+                                <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=259d5499224d3"></script>
+                                <!--MOB SHARE END-->
 
 
       

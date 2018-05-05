@@ -134,6 +134,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context docBase=<span class="string">"dreamlive"</span> path=<span class="string">"/ROOT"</span> reloadable=<span class="string">"true"</span>  source=<span class="string">"org.eclipse.jst.jee.server:dreamlive"</span>/&gt;</div></pre></td></tr></table></figure>
 <p>这行代码，在你部署新项目的时候，docBase和source会随着改变，现在还是 热部署的状态，这样每次更改class文件都会自动的去编译，比较耗时，接下来我们更改一下配置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context docBase=<span class="string">"dreamlive"</span> path=<span class="string">"/ROOT"</span> reloadable=<span class="string">"false"</span> crossContext=<span class="string">"true"</span> source=<span class="string">"org.eclipse.jst.jee.server:dreamlive"</span>/&gt;</div></pre></td></tr></table></figure></p>
 <p>这里将<font color="red">reloadable</font>改为<font color="red">false</font>,添加<font color="red">crossContext=”true”</font>，这样就能进行热启动了，注意：需要用debug启动.不过我们需要在每次部署新项目的时候，重新去更改这个配置，我们可以观察每次部署新项目的时候，server.xml这个文件的动态变化.<br>（Tomcat8 好像不支持热启动）</p>
+<p>hello <a href="https://wangchuangshi.github.io/2018/05/05/eclipse实现热部署和热启动/">https://wangchuangshi.github.io/2018/05/05/eclipse实现热部署和热启动/</a> bye</p>
 
   </article>
   <div class="random-toc-area">
@@ -156,14 +157,35 @@
   
 </nav>
 
-  <!-- JiaThis Button BEGIN -->
-
-  <script type="text/javascript">
-    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
-  </script>
-  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
-
-<!-- JiaThis Button END -->
+  
+    <!--MOB SHARE BEGIN-->
+                                <div class="-mob-share-ui-button -mob-share-open">分享</div>
+                                <div class="-mob-share-ui" style="display: none">
+                                    <ul class="-mob-share-list">
+                                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                                        <li class="-mob-share-qq"><p>QQ好友</p></li>
+                                        <li class="-mob-share-weixin"><p>微信</p></li>
+                                        <li class="-mob-share-douban"><p>豆瓣</p></li>
+                                        <li class="-mob-share-renren"><p>人人网</p></li>
+                                        <li class="-mob-share-kaixin"><p>开心网</p></li>
+                                        <li class="-mob-share-facebook"><p>Facebook</p></li>
+                                        <li class="-mob-share-twitter"><p>Twitter</p></li>
+                                        <li class="-mob-share-pocket"><p>Pocket</p></li>
+                                        <li class="-mob-share-google"><p>Google+</p></li>
+                                        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+                                        <li class="-mob-share-mingdao"><p>明道</p></li>
+                                        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+                                        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+                                        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+                                        <li class="-mob-share-linkedin"><p>LinkedIn</p></li>
+                                    </ul>
+                                    <div class="-mob-share-close">取消</div>
+                                </div>
+                                <div class="-mob-share-ui-bg"></div>
+                                <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=259d5499224d3"></script>
+                                <!--MOB SHARE END-->
 
 
       

@@ -157,6 +157,7 @@
 <p>或者：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">interface Door &#123;</div><div class="line">   public abstract <span class="keyword">void</span> open();</div><div class="line">   public abstract <span class="keyword">void</span> close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;但是现在如果我们需要门具有报警alarm( )的功能，那么该如何实现？下面提供两种思路：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;1）将这三个功能都放在抽象类里面，但是这样一来所有继承于这个抽象类的子类都具备了报警功能，但是有的门并不一定具备报警功能；<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2）将这三个功能都放在接口里面，需要用到报警功能的类就需要实现这个接口中的open( )和close( )，也许这个类根本就不具备open( )和close( )这两个功能，比如火灾报警器。</p>
 <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;从这里可以看出， Door的open() 、close()和alarm()根本就属于两个不同范畴内的行为，open()和close()属于门本身固有的行为特性，而alarm()属于延伸的附加行为。因此最好的解决办法是单独将报警设计为一个接口，包含alarm()行为,Door设计为单独的一个抽象类，包含open和close两种行为。再设计一个报警门继承Door类和实现Alarm接口。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">interface Alram &#123;</div><div class="line">    <span class="keyword">void</span> alarm();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">abstract <span class="class"><span class="keyword">class</span> <span class="title">Door</span> </span>&#123;</div><div class="line">    <span class="keyword">void</span> open();</div><div class="line">    <span class="keyword">void</span> close();</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AlarmDoor</span> <span class="keyword">extends</span> <span class="title">Door</span> <span class="title">implements</span> <span class="title">Alarm</span> </span>&#123;</div><div class="line">    <span class="keyword">void</span> oepn() &#123;</div><div class="line">      <span class="comment">/*....*/</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">void</span> close() &#123;</div><div class="line">      <span class="comment">/*....*/</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">void</span> alarm() &#123;</div><div class="line">      <span class="comment">/*....*/</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>hello <a href="https://wangchuangshi.github.io/2018/01/10/深入理解java接口与抽象类/">https://wangchuangshi.github.io/2018/01/10/深入理解java接口与抽象类/</a> bye</p>
 
   </article>
   <div class="random-toc-area">
@@ -181,14 +182,35 @@
   
 </nav>
 
-  <!-- JiaThis Button BEGIN -->
-
-  <script type="text/javascript">
-    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
-  </script>
-  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
-
-<!-- JiaThis Button END -->
+  
+    <!--MOB SHARE BEGIN-->
+                                <div class="-mob-share-ui-button -mob-share-open">分享</div>
+                                <div class="-mob-share-ui" style="display: none">
+                                    <ul class="-mob-share-list">
+                                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                                        <li class="-mob-share-qq"><p>QQ好友</p></li>
+                                        <li class="-mob-share-weixin"><p>微信</p></li>
+                                        <li class="-mob-share-douban"><p>豆瓣</p></li>
+                                        <li class="-mob-share-renren"><p>人人网</p></li>
+                                        <li class="-mob-share-kaixin"><p>开心网</p></li>
+                                        <li class="-mob-share-facebook"><p>Facebook</p></li>
+                                        <li class="-mob-share-twitter"><p>Twitter</p></li>
+                                        <li class="-mob-share-pocket"><p>Pocket</p></li>
+                                        <li class="-mob-share-google"><p>Google+</p></li>
+                                        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+                                        <li class="-mob-share-mingdao"><p>明道</p></li>
+                                        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+                                        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+                                        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+                                        <li class="-mob-share-linkedin"><p>LinkedIn</p></li>
+                                    </ul>
+                                    <div class="-mob-share-close">取消</div>
+                                </div>
+                                <div class="-mob-share-ui-bg"></div>
+                                <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=259d5499224d3"></script>
+                                <!--MOB SHARE END-->
 
 
       
