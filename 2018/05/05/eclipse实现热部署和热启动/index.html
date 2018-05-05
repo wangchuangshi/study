@@ -1,8 +1,6 @@
 
 
 
-  
-
 
 
 
@@ -18,9 +16,9 @@
   
   
   
-    <meta name="description" content="每天进步一点点，一点点就好！">
+    <meta name="description" content="&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;热部署&ensp;:&ensp;就是容器状态在运行的情况下重新部署整个项目.在这种情况下一般整个内存会清空,重新加载.简单来说就是Tomcat或者其他的web服务器会帮我们重新加载项目.这种方式可能会造成sessin丢失等情况.&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;热加载&ensp;:&...">
   
-  <title>标签: JavaScript [ BlueBird ]</title>
+  <title>eclipse实现热部署和热启动 [ BlueBird ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -39,6 +37,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2018/01/10/深入理解java接口与抽象类/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        深入理解Java接口与抽象类
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -96,125 +103,71 @@
     <div id="content-inner">
       
       
-  <div id="tag">
-    <h1>JavaScript</h1>
-    
+  <article id="post">
+    <h1>eclipse实现热部署和热启动</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2018-05-05</span>
+      
+        <span id = "post-title-updated">修改于 2018-05-05</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
       
       
         
-      
-      
-    
-      
-      
         
-          
-        
+        <a href="/tags/开发工具/">开发工具</a>
       
+      </span>
       
-      <div class="post-title-item">
-  
-  <a href="/2017/09/06/JavaScript-日期操作/">
-  
-    JavaScript 日期操作
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-6</span>
+    </p>
     
-    
-    <span id = "post-title-tags">
-    标签
-    
-    
-      
-      
-      <a href="/tags/JavaScript/">JavaScript</a>
-    
-    </span>
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-      
-    
-      
-      
-        
-          
-        
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2017/09/01/JavaScript-数组排序/">
-  
-    JavaScript数组排序
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-1</span>
-    
-    
-    <span id = "post-title-tags">
-    标签
-    
-    
-      
-      
-      <a href="/tags/JavaScript/">JavaScript</a>
-    
-    </span>
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-      
-    
-      
-      
-        
-      
-      
-    
-      
-      
-        
-      
-      
-    
-      
-      
-        
-      
-      
-    
-      
-      
-        
-      
-      
-    
-      
-      
-        
-      
-      
+    <hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<strong>热部署</strong>&ensp;:&ensp;就是容器状态在运行的情况下重新部署整个项目.在这种情况下一般整个内存会清空,重新加载.简单来说就是Tomcat或者其他的web服务器会帮我们重新加载项目.这种方式可能会造成sessin丢失等情况.<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<strong>热加载</strong>&ensp;:&ensp;就是容器状态在运行的情况下重新加载改变编译后的类.在这种情况下内存不会清空,sessin不会丢失,但容易造成内存溢出,或者找不到方法。因为内存无法转变成对像. 一般改变类的结构和模型就会有异常，在已经有的变量和方法中改变是不会出问题的.</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在基于Java的实现热部署、热加载的过程中，类装入器扮演着重要的角色。类装入器不能重新装入一个已经装入的类，否则会报java.lang.LinkageError，但只要使用一个新的类装入器实例，就可以将类再次装入一个正在运行的应用程序。一般debug模式都支持热加载。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;但我在这里遇到了eclipse使用debug启动却并没有热加载的状况，这样对于开发来说是非常耗时的，因为每更改一次class文件都需要重新编译。下面我就如何使用eclipse进行热加载，做一个简单介绍：</p>
+<p><strong>启动eclicpse 找到下面这个目录</strong></p>
+<p><img src="http://ovrfivmb5.bkt.clouddn.com/2018050501.png?imageslim" alt="&quot;&quot;"></p>
+<p>打开server.xml,找到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context docBase=<span class="string">"dreamlive"</span> path=<span class="string">"/ROOT"</span> reloadable=<span class="string">"true"</span>  source=<span class="string">"org.eclipse.jst.jee.server:dreamlive"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>这行代码，在你部署新项目的时候，docBase和source会随着改变，现在还是 热部署的状态，这样每次更改class文件都会自动的去编译，比较耗时，接下来我们更改一下配置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context docBase=<span class="string">"dreamlive"</span> path=<span class="string">"/ROOT"</span> reloadable=<span class="string">"false"</span> crossContext=<span class="string">"true"</span> source=<span class="string">"org.eclipse.jst.jee.server:dreamlive"</span>/&gt;</div></pre></td></tr></table></figure></p>
+<p>这里将<font color="red">reloadable</font>改为<font color="red">false</font>,添加<font color="red">crossContext=”true”</font>，这样就能进行热启动了，注意：需要用debug启动.不过我们需要在每次部署新项目的时候，重新去更改这个配置，我们可以观察每次部署新项目的时候，server.xml这个文件的动态变化.<br>（Tomcat8 好像不支持热启动）</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
     
   </div>
+</div>
+
+  
+<nav id="pagination">
+  
 
   
 
+  
+    <a href="/2018/01/10/深入理解java接口与抽象类/" class="next">下一篇 深入理解Java接口与抽象类 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+  <script type="text/javascript">
+    var jiathis_config = {"data_track_clickback":true,"summary":"","showClose":true,"shortUrl":false,"hideMore":false};
+  </script>
+  <script type="text/javascript" src="//v3.jiathis.com/code/jiathis_r.js?uid=2143077&btn=r2.gif&move=0" charset="utf-8"></script>
+
+<!-- JiaThis Button END -->
+
+
+      
+      <div id="uyan_frame"></div>
       
       
     </div>
@@ -232,6 +185,10 @@
 
 </div>
 
+
+  <!-- UY BEGIN -->
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143077"></script>
+<!-- UY END -->
 
 <div id="user-card">
   <div class="center-field">
@@ -330,6 +287,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "55AAAD";
