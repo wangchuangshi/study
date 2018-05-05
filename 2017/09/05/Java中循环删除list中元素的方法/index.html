@@ -143,7 +143,6 @@
 <h3 id="3-iterator遍历。"><a href="#3-iterator遍历。" class="headerlink" title="3.iterator遍历。"></a>3.iterator遍历。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; it=list.iterator();</div><div class="line">   <span class="keyword">while</span>(it.hasNext())&#123;</div><div class="line">   String x=it.next();</div><div class="line">	<span class="keyword">if</span>(x.equals(<span class="string">"del"</span>))&#123;</div><div class="line">	it.remove();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>&ensp;&ensp;这种方式可以正常的循环及删除。但要注意的是，使用iterator的remove方法，如果用list的remove方法同样会报上面提到的ConcurrentModificationException错误。</p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>　　（1）循环删除list中特定一个元素的，可以使用三种方式中的任意一种，但在使用中要注意上面分析的各个问题。<br>　　（2）循环删除list中多个元素的，应该使用迭代器iterator方式。</p>
-<p>本文地址： <a href="https://wangchuangshi.github.io/2017/09/05/Java中循环删除list中元素的方法/">https://wangchuangshi.github.io/2017/09/05/Java中循环删除list中元素的方法/</a> </p>
 
   </article>
   <div class="random-toc-area">

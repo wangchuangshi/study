@@ -134,7 +134,6 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context docBase=<span class="string">"dreamlive"</span> path=<span class="string">"/ROOT"</span> reloadable=<span class="string">"true"</span>  source=<span class="string">"org.eclipse.jst.jee.server:dreamlive"</span>/&gt;</div></pre></td></tr></table></figure>
 <p>这行代码，在你部署新项目的时候，docBase和source会随着改变，现在还是 热部署的状态，这样每次更改class文件都会自动的去编译，比较耗时，接下来我们更改一下配置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context docBase=<span class="string">"dreamlive"</span> path=<span class="string">"/ROOT"</span> reloadable=<span class="string">"false"</span> crossContext=<span class="string">"true"</span> source=<span class="string">"org.eclipse.jst.jee.server:dreamlive"</span>/&gt;</div></pre></td></tr></table></figure></p>
 <p>这里将<font color="red">reloadable</font>改为<font color="red">false</font>,添加<font color="red">crossContext=”true”</font>，这样就能进行热启动了，注意：需要用debug启动.不过我们需要在每次部署新项目的时候，重新去更改这个配置，我们可以观察每次部署新项目的时候，server.xml这个文件的动态变化.<br>（Tomcat8 好像不支持热启动）</p>
-<p>本文地址： <a href="https://wangchuangshi.github.io/2018/05/05/eclipse实现热部署和热启动/">https://wangchuangshi.github.io/2018/05/05/eclipse实现热部署和热启动/</a> </p>
 
   </article>
   <div class="random-toc-area">
