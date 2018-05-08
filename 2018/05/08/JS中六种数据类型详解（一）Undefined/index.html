@@ -16,15 +16,9 @@
   
   
   
-    <meta name="description" content="1、    打开eclipse - Help：
-
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;如图：&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-
-2、如图所示，点击Add，添加svn下载地址：http://subclipse.tigris.org/update_1.8.x
-
-&ensp;&ensp;&ensp;&ensp;&ensp;...">
+    <meta name="description" content="&ensp;&ensp;&ensp;&ensp;JS中有6种数据类型：Undefined、Null、Boolean、Number、String和Object。JS中不支持任何创建自定义类型的机制，而所有值最终都将是这6种数据类型。其数据类型的动态性特点足以表示所有数据。JS提供typeof操作符来检测变量的数据类型。&ensp;&ensp;&ensp;（typeof返回的是字符串有六种可能:...">
   
-  <title>eclipse安装SVN插件步骤 [ BlueBird ]</title>
+  <title>JavaScript中6种数据类型详解（一）——Undefined [ BlueBird ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,22 +37,13 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2018/05/08/JS中六种数据类型详解（一）Undefined/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        JavaScript中6种数据类型详解（一）——Undefined
-      </div>
-    </div>
-  
   
     <div class="item next">
-      <a href="/2018/05/05/eclipse实现热部署和热启动/">
+      <a href="/2018/05/06/eclipse安装SVN插件步骤/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        eclipse实现热部署和热启动
+        eclipse安装SVN插件步骤
       </div>
     </div>
   
@@ -126,11 +111,11 @@
       
       
   <article id="post">
-    <h1>eclipse安装SVN插件步骤</h1>
+    <h1>JavaScript中6种数据类型详解（一）——Undefined</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2018-05-06</span>
+      <span id = "post-title-date">撰写于 2018-05-08</span>
       
-        <span id = "post-title-updated">修改于 2018-05-06</span>
+        <span id = "post-title-updated">修改于 2018-05-08</span>
       
       
       
@@ -140,31 +125,26 @@
       
         
         
-        <a href="/tags/开发工具/">开发工具</a>
+        <a href="/tags/JavaScript/">JavaScript</a>
       
       </span>
       
     </p>
     
-    <blockquote>
-<p>1、    打开eclipse - Help：</p>
-</blockquote>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;如图：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="http://ovrfivmb5.bkt.clouddn.com/1.png?imageslim" alt=""></p>
-<blockquote>
-<p>2、如图所示，点击Add，添加svn下载地址：<font color="red"><a href="http://subclipse.tigris.org/update_1.8.x" target="_blank" rel="external">http://subclipse.tigris.org/update_1.8.x</a></font></p>
-</blockquote>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="http://ovrfivmb5.bkt.clouddn.com/2018050602.png?middlePicture" alt="&quot;&quot;"></p>
-<blockquote>
-<p>3、等插件加载出来，之后一直点击next就可以了。</p>
-</blockquote>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="http://ovrfivmb5.bkt.clouddn.com/2018050603.png?middlePicture" alt="&quot;&quot;"></p>
-<blockquote>
-<p>4、下载完成之后如图添加项目地址：</p>
-</blockquote>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img src="http://ovrfivmb5.bkt.clouddn.com/2018050604.png?middlePicture" alt="&quot;&quot;"></p>
-<blockquote>
-<p>5、之后在项目路径上右键检出为 项目就OK</p>
-</blockquote>
+    <hr>
+<p>&ensp;&ensp;&ensp;&ensp;JS中有6种数据类型：<font color="red">Undefined</font>、<font color="red">Null</font>、<font color="red">Boolean</font>、<font color="red">Number</font>、<font color="red">String</font>和<font color="red">Object</font>。JS中不支持任何创建自定义类型的机制，而所有值最终都将是这6种数据类型。其数据类型的动态性特点足以表示所有数据。JS提供typeof操作符来检测变量的数据类型。<br>&ensp;&ensp;&ensp;<strong><font color="red">（typeof返回的是字符串有六种可能:”undefined”,”object”,”boolean”,”number”,”string”,”function”）</font></strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;我们先来看看Undefined这个数据类型吧，Undefined类型只有一个特殊的值——undefined。undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：</p>
+<ul>
+<li>变量被声明了，但没有赋值时，就等于undefined。</li>
+<li>调用函数时，应该提供的参数没有提供，该参数等于undefined。</li>
+<li>对象没有赋值的属性，该属性的值为undefined。</li>
+<li>函数没有返回值时，默认返回undefined。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp;<strong>例如：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> color;</div><div class="line">alert(message == <span class="literal">undefined</span>);<span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;这个例子只声明了变量color，但未对其初始化。比较这个变量与undefined字面量，结果表明它们是相等的。这个例子与下面的例子是等价的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> color = <span class="literal">undefined</span>;</div><div class="line">alert(color == <span class="literal">undefined</span>)  ;<span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;不过，包含undefined值的变量与尚未定义的变量还是不一样的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> color ;<span class="comment">/**变量声明之后默认取得undefined值*/</span></div><div class="line">   <span class="comment">/**未声明的变量 var age*/</span></div><div class="line">   alert(color);   <span class="comment">/**"undefined"*/</span></div><div class="line">   alert(age);    <span class="comment">//产生错误</span></div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;然而，对未初始化的变量执行typeof操作符会返回undefined值，而对未声明的变量执行typeof操作符同样也会返回undefined值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> color;<span class="comment">/**变量声明之后默认取得undefined值*/</span></div><div class="line"><span class="comment">/**未声明的变量  var age*/</span></div><div class="line">   alert(<span class="keyword">typeof</span> color);  <span class="comment">/**"undefined"*/</span></div><div class="line">alert(<span class="keyword">typeof</span> age);   <span class="comment">/** "undefined"*/</span></div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;结果表明，对未初始化和未声明的变量执行 typeof 操作符都返回了 undefined 值；这个结果有其逻辑上的合理性。因为虽然这两种变量从技术角度看有本质区别，但实际上无论对哪种变量也不可能执行真正的操作。</p>
 
   </article>
   <div class="random-toc-area">
@@ -179,13 +159,11 @@
   
 <nav id="pagination">
   
-    <a href="/2018/05/08/JS中六种数据类型详解（一）Undefined/" class="prev">&larr; 上一篇 JavaScript中6种数据类型详解（一）——Undefined</a>
-  
 
   
 
   
-    <a href="/2018/05/05/eclipse实现热部署和热启动/" class="next">下一篇 eclipse实现热部署和热启动 &rarr;</a>
+    <a href="/2018/05/06/eclipse安装SVN插件步骤/" class="next">下一篇 eclipse安装SVN插件步骤 &rarr;</a>
   
 </nav>
 
