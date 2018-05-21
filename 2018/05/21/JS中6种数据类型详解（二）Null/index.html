@@ -1,0 +1,358 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="WangCS">
+  
+  
+  
+  
+    <meta name="description" content="&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Null类型是第二个只有一个值的数据类型，这个特殊的值是null，从逻辑角度来看，null值表示一个空对象指针，而这也正是使用typeof操作符检测null值会返回“object”的原因，如下面的例子所示：
+12var car =null;alert(typeof null);  //'object(其实这是JavaSc...">
+  
+  <title>JavaScript中6种数据类型详解（二）—— Null [ BlueBird ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2018/05/08/JS中6种数据类型详解（一）Undefined/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        JavaScript中6种数据类型详解（一）——Undefined
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg"/>
+          <div id="homelink">BlueBird</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">博文</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/wangchuangshi">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>JavaScript中6种数据类型详解（二）—— Null</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2018-05-21</span>
+      
+        <span id = "post-title-updated">修改于 2018-05-21</span>
+      
+      
+      
+    </p>
+    
+    <p> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Null类型是第二个只有一个值的数据类型，这个特殊的值是null，从逻辑角度来看，null值表示一个空对象指针，而这也正是使用typeof操作符检测null值会返回“object”的原因，如下面的例子所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> car =<span class="literal">null</span>;</div><div class="line">alert(<span class="keyword">typeof</span> <span class="literal">null</span>);  <span class="comment">//'object(其实这是JavaScript最初实现的一个错误，后来被ECMAScript沿用下来)'</span></div></pre></td></tr></table></figure>
+<p> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;如果定义的变量准备在将来用户保存对象，那么最好将该变量初始化为null而不是其他值。这样一来，只要直接检查null值就可以知道相应的变量是否已经保存了一个对象的引用，如下面的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(car != <span class="literal">null</span>)&#123;</div><div class="line"> <span class="comment">//'对car执行某些操作'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;实际上，undefined值是派生自null值的，因此ECMA-262规定对他们的相等测试要返回true：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="literal">null</span> == <span class="literal">undefined</span>)  <span class="comment">//'true'</span></div></pre></td></tr></table></figure>
+<p> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;这里，位于null和undefined之间的相等操作符（==）总是返回true，不过要注意的是，这个操作符出于比较的目的会转换其操作数。<br> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;尽管null和undefined有这样的关系，但它们的用途完全不同，如前所述，无论什么情况下都没有必要把一个变量的值显式地设置为undefined，可视同样的规则对null却不适用。换句话说，只要意在保存对象的变量还没有真正保存对象，就应该明确地让该变量保存null值。这样做不仅可以体现null作为空对象指针的惯例，而且也有助于进一步区分null和undefined。在程序中如何判断变量是否为null。<br> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<font color="red"><strong>以下是不正确的方法：</strong> </font><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (exp == <span class="literal">null</span>)&#123;</div><div class="line">    alert(<span class="string">"is null"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//'exp 为 undefined 时，也会得到与 null 相同的结果，虽然 null 和 undefined 不一样。</span></div><div class="line">注意：要同时判断 <span class="literal">null</span> 和 <span class="literal">undefined</span> 时可使用本法。<span class="string">'</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (!exp)&#123;</div><div class="line">     alert(<span class="string">"is null"</span>);</div><div class="line"> &#125; </div><div class="line"><span class="comment">//' 如果 exp 为 undefined，或数字零，或 false，也会得到与 null 相同的结果，虽然 null 和二者不一样。</span></div><div class="line">注意：要同时判断 <span class="literal">null</span>、<span class="literal">undefined</span>、数字零、<span class="literal">false</span> 时可使用本法。<span class="string">'</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> exp == <span class="string">"null"</span>)&#123;</div><div class="line">    alert(<span class="string">"is null"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//'为了向下兼容，exp 为 null 时，typeof null 总返回 object，所以不能这样判断。'</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (isNull(exp))&#123;</div><div class="line">    alert(<span class="string">"is null"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//'VBScript 中有 IsNull 这个函数，但 JavaScript 中没有。'</span></div></pre></td></tr></table></figure>
+<hr>
+<p> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<font color="red"><strong>以下是正确的方法： ：</strong> </font><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (!exp &amp;&amp; <span class="keyword">typeof</span> exp != <span class="string">"undefined"</span> &amp;&amp; exp != <span class="number">0</span>)&#123;</div><div class="line">    alert(<span class="string">"is null"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//'typeof exp != "undefined" 排除了 undefined；exp != 0 排除了数字零和 false。更简单的正确的方法：'</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (exp === <span class="literal">null</span>)&#123;</div><div class="line">    alert(<span class="string">"is null"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>尽管如此，我们在 DOM 应用中，一般只需要用 (!exp) 来判断就可以了，因为 DOM 应用中，可能返回 null，可能返回 undefined，如果具体判断 null 还是 undefined 会使程序过于复杂。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2018/05/08/JS中6种数据类型详解（一）Undefined/" class="next">下一篇 JavaScript中6种数据类型详解（一）——Undefined &rarr;</a>
+  
+</nav>
+
+  
+    <!--MOB SHARE BEGIN-->
+                                <div class="-mob-share-ui-button -mob-share-open">分享</div>
+                                <div class="-mob-share-ui" style="display: none">
+                                    <ul class="-mob-share-list">
+                                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                                        <li class="-mob-share-qq"><p>QQ好友</p></li>
+                                        <li class="-mob-share-weixin"><p>微信</p></li>
+                                        <li class="-mob-share-douban"><p>豆瓣</p></li>
+                                        <li class="-mob-share-renren"><p>人人网</p></li>
+                                        <li class="-mob-share-kaixin"><p>开心网</p></li>
+                                        <li class="-mob-share-facebook"><p>Facebook</p></li>
+                                        <li class="-mob-share-twitter"><p>Twitter</p></li>
+                                        <li class="-mob-share-pocket"><p>Pocket</p></li>
+                                        <li class="-mob-share-google"><p>Google+</p></li>
+                                        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+                                        <li class="-mob-share-mingdao"><p>明道</p></li>
+                                        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+                                        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+                                        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+                                        <li class="-mob-share-linkedin"><p>LinkedIn</p></li>
+                                    </ul>
+                                    <div class="-mob-share-close">取消</div>
+                                </div>
+                                <div class="-mob-share-ui-bg"></div>
+                                <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=259d5499224d3"></script>
+                                <!--MOB SHARE END-->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by WangCS using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- UY BEGIN -->
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143077"></script>
+<!-- UY END -->
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg">
+    <p id="description">每天进步一点点，一点点就好！</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/wangchuangshi">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6c9f46c6384b834f00e6ec1cd690d9a6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="/js/tctip-master/tctip-1.0.2.js"></script>
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "55AAAD";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
