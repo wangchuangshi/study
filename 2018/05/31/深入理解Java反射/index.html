@@ -1,0 +1,386 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="WangCS">
+  
+  
+  
+  
+    <meta name="description" content="一：反射的概念
+
+&ensp;&ensp;&ensp;&ensp;&ensp;主要是指程序可以访问，检测和修改它本身状态或行为的一种能力，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。换而言之，就是能够分析类的能力的程序称为反射。
+
+二：反射能做什么
+
+&ensp;&ensp;&ensp;&ensp;&ensp;反射机制主要提供了以下功能：
+
+在运行时判断任意一个...">
+  
+  <title>深入理解Java反射 [ BlueBird ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2018/05/21/JS中6种数据类型详解（二）Null/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        JavaScript中6种数据类型详解（二）—— Null
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg"/>
+          <div id="homelink">BlueBird</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">博文</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/wangchuangshi">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>深入理解Java反射</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2018-05-31</span>
+      
+        <span id = "post-title-updated">修改于 2018-06-04</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/Java/">Java</a>
+      
+      </span>
+      
+    </p>
+    
+    <blockquote>
+<p>一：反射的概念</p>
+</blockquote>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;主要是指程序可以访问，检测和修改它本身状态或行为的一种能力，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。换而言之，就是能够分析类的能力的程序称为反射。</p>
+<blockquote>
+<p>二：反射能做什么</p>
+</blockquote>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;反射机制主要提供了以下功能：</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类；</li>
+<li>在运行时构造任意一个类的对象；</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法；</li>
+<li>在运行时调用任意一个对象的方法；</li>
+<li>生成动态代理。</li>
+</ul>
+<hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;<strong>程序运行相关的类</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;父类<strong>Person</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">	public <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">		<span class="comment">/**唯一ID*/</span></div><div class="line">		private Integer id;</div><div class="line">		<span class="comment">/**姓名*/</span></div><div class="line">		private <span class="built_in">String</span> name;</div><div class="line">		<span class="comment">/**年龄*/</span></div><div class="line">		private Integer age;</div><div class="line">		<span class="comment">/**手机号*/</span></div><div class="line">		public <span class="built_in">String</span> telephone;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;子类<strong>Member</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Member</span> <span class="keyword">extends</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Read</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String originName = <span class="string">"会员"</span>;</div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Member</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Member</span><span class="params">(String cardNo)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.cardNo=cardNo;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Member</span><span class="params">(String cardNo, Double salary)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.cardNo = cardNo;</div><div class="line">        <span class="keyword">this</span>.salary=salary;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    <span class="comment">/**会员卡号*/</span></div><div class="line">    <span class="keyword">private</span> String cardNo;</div><div class="line">    <span class="comment">/**会员工资*/</span></div><div class="line">    <span class="keyword">private</span> Double salary;</div><div class="line">	</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">haveRead</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getTips</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"静态方法调用"</span>);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCardNo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cardNo;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCardNo</span><span class="params">(String cardNo)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.cardNo = cardNo;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">getSalary</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> salary;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSalary</span><span class="params">(Double salary)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.salary = salary;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;接口 <strong>Read</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Read</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">haveRead</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;<strong>1.获取Class对象的三种方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">reflex</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">	</div><div class="line">            Member member=<span class="keyword">new</span> Member();</div><div class="line">	</div><div class="line">            <span class="comment">/*1 通过全类名获取，用的比较多，但可能抛出ClassNotFoundException异常*/</span></div><div class="line">            Class&lt;?&gt; class1=Class.forName(<span class="string">"reflex.Member"</span>);</div><div class="line">            System.out.println(<span class="string">"class1:"</span>+ class1);</div><div class="line">	</div><div class="line">            <span class="comment">/*2 直接通过类名.class的方式得到*/</span></div><div class="line">            Class&lt;?&gt; class2=Member.class;</div><div class="line">            System.out.println(<span class="string">"class2:"</span>+ class2);</div><div class="line">	</div><div class="line">            <span class="comment">/*3 通过对象的getClass()方法获取*/</span></div><div class="line">            Class&lt;?&gt; class3 = member.getClass();</div><div class="line">            System.out.println(<span class="string">"class3:"</span>+class3);</div><div class="line">	</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            System.out.println(<span class="string">"未找到类"</span>);</div><div class="line">            e.getMessage();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;<strong>2.获取类的构造方法getDeclaredConstructors和getConstructors</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">reflex05</span> </span>&#123;</div><div class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</div><div class="line">        Member member=<span class="keyword">new</span> Member();</div><div class="line">        Class&lt;?&gt; class1=member.getClass();</div><div class="line">	</div><div class="line">	<span class="comment">/*返回 Constructor 对象的一个数组,</span></div><div class="line"><span class="comment">	这些对象反映此 Class 对象表示的类声明的所有构造方法*/</span></div><div class="line">        Constructor&lt;?&gt;[]  constructors1=class1.getDeclaredConstructors();</div><div class="line">        <span class="keyword">for</span>(Constructor&lt;?&gt; c:constructors1)&#123;</div><div class="line">            System.out.println(c);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">	<span class="comment">/*返回一个包含某些 Constructor 对象的数组,</span></div><div class="line"><span class="comment">	这些对象反映此Class对象所表示的类的所有公共构造方法*/</span></div><div class="line">        Constructor&lt;?&gt;[]  constructors2=class1.getConstructors();</div><div class="line">        <span class="keyword">for</span>(Constructor&lt;?&gt; c:constructors2)&#123;</div><div class="line">            System.out.println(c);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2018/05/21/JS中6种数据类型详解（二）Null/" class="next">下一篇 JavaScript中6种数据类型详解（二）—— Null &rarr;</a>
+  
+</nav>
+
+  
+    <!--MOB SHARE BEGIN-->
+                                <div class="-mob-share-ui-button -mob-share-open">分享</div>
+                                <div class="-mob-share-ui" style="display: none">
+                                    <ul class="-mob-share-list">
+                                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                                        <li class="-mob-share-qq"><p>QQ好友</p></li>
+                                        <li class="-mob-share-weixin"><p>微信</p></li>
+                                        <li class="-mob-share-douban"><p>豆瓣</p></li>
+                                        <li class="-mob-share-renren"><p>人人网</p></li>
+                                        <li class="-mob-share-kaixin"><p>开心网</p></li>
+                                        <li class="-mob-share-facebook"><p>Facebook</p></li>
+                                        <li class="-mob-share-twitter"><p>Twitter</p></li>
+                                        <li class="-mob-share-pocket"><p>Pocket</p></li>
+                                        <li class="-mob-share-google"><p>Google+</p></li>
+                                        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+                                        <li class="-mob-share-mingdao"><p>明道</p></li>
+                                        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+                                        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+                                        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+                                        <li class="-mob-share-linkedin"><p>LinkedIn</p></li>
+                                    </ul>
+                                    <div class="-mob-share-close">取消</div>
+                                </div>
+                                <div class="-mob-share-ui-bg"></div>
+                                <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=259d5499224d3"></script>
+                                <!--MOB SHARE END-->
+
+
+      
+      <div id="uyan_frame"></div>
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by WangCS using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <!-- UY BEGIN -->
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143077"></script>
+<!-- UY END -->
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://raw.githubusercontent.com/wangchuangshi/imageTotal/master/css/timging.jpg">
+    <p id="description">每天进步一点点，一点点就好！</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/wangchuangshi">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+  <script>
+if(isTriggerAnalytics) {
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6c9f46c6384b834f00e6ec1cd690d9a6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+}
+</script>
+
+
+
+
+
+  
+  
+    <script src="/js/tctip-master/tctip-1.0.2.js"></script>
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "55AAAD";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
